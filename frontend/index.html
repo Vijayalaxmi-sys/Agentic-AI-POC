@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Responsive layout for desktop/laptop -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Agentic AI Workflow Assistant</title>
+
+  <!-- Main UI styles -->
+  <link rel="stylesheet" href="/frontend/style.css" />
+</head>
+
+<body>
+  <!-- LOGIN WELCOME SCREEN -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">AI</div>
+
+      <h1>Welcome to Agentic AI Workflow Assistant</h1>
+
+      <p>
+        Your smart workspace for turning simple requests into real automated workflows.
+      </p>
+
+      <p class="login-subtext">
+        Please login with your authorized Google account to open the app.
+      </p>
+
+      <a class="google-login-btn" href="/login/google">
+        Continue with Google
+      </a>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="appShell" class="app-shell hidden">
+
+    <!-- LEFT SIDEBAR: ChatGPT-style dynamic chat history -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">AI</div>
+        <div>
+          <h1>Agentic AI Workflow</h1>
+          <p>Assistant</p>
+        </div>
+      </div>
+
+      <button class="new-chat-btn" id="newChatBtn">
+        + New Chat
+      </button>
+
+      <div class="search-box">
+        <input id="searchChats" type="text" placeholder="Search chats..." />
+      </div>
+
+      <!-- Chat history is filled dynamically by app.js -->
+      <div class="history-section">
+        <p class="history-label">Today</p>
+        <div id="chatHistoryList"></div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="plain-sidebar-btn" id="settingsBtn">Settings</button>
+      </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <main class="main">
+
+      <!-- TOP BAR -->
+      <header class="topbar">
+        <div>
+          <h2 id="chatTitle">AI Workflow Assistant</h2>
+          <p id="chatSubtitle">Ask anything. I will create and execute the workflow.</p>
+        </div>
+
+        <div class="topbar-actions"></div>
+      </header>
+
+      <!-- CHAT AREA -->
+      <section class="chat-area" id="chatArea">
+
+        <!-- Default welcome bot message -->
+        <div class="message-row bot">
+          <div class="avatar">AI</div>
+          <div class="message-card bot-card">
+            <div class="message-meta">
+              <strong>AI Assistant</strong>
+              <span>Ready</span>
+            </div>
+            <p>Tell me what workflow you want to create.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Dynamic tool status cards -->
+      <section class="tool-status-panel hidden" id="toolStatusPanel"></section>
+
+      <!-- WORKFLOW EXECUTION PANEL -->
+      <section class="workflow-panel" id="workflowPanel">
+
+        <div class="workflow-header">
+          <div>
+            <h3>Workflow</h3>
+            <p id="workflowSummary">No workflow executed yet.</p>
+          </div>
+
+          <span class="workflow-status idle" id="workflowStatus">
+            Idle
+          </span>
+        </div>
+
+        <div class="workflow-nodes" id="workflowNodes">
+          <div class="empty-workflow">
+            Actual n8n workflow will appear here after execution.
+          </div>
+        </div>
+
+        <div class="workflow-result" id="workflowResult">
+          <p>No result yet.</p>
+        </div>
+
+        <details class="technical-details">
+          <summary>Show technical details</summary>
+          <pre id="rawJsonBox">{}</pre>
+        </details>
+
+      </section>
+
+      <!-- INPUT AREA -->
+      <footer class="composer">
+        <input
+          id="userInput"
+          type="text"
+          placeholder="Type your message..."
+          autocomplete="off"
+        />
+
+        <button id="sendBtn" class="send-btn">
+          Send
+        </button>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div id="settingsModal" class="settings-modal hidden">
+    <div class="settings-card">
+      <div class="settings-header">
+        <h2>Account Settings</h2>
+        <button id="closeSettingsBtn" class="settings-close-btn">×</button>
+      </div>
+
+      <div class="settings-row">
+        <span>Name</span>
+        <strong id="settingsUserName">-</strong>
+      </div>
+
+      <div class="settings-row">
+        <span>Email</span>
+        <strong id="settingsUserEmail">-</strong>
+      </div>
+<!--
+     <div class="settings-row">
+        <span>User ID</span>
+        <strong id="settingsUserId">-</strong>
+      </div>
+-->
+      <button id="settingsLogoutBtn" class="logout-btn">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <!-- Main frontend logic -->
+  <script src="/frontend/app.js"></script>
+</body>
+</html>
