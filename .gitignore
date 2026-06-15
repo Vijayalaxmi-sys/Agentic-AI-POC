@@ -1,0 +1,9 @@
+config.py
+
+data/connections.json
+data/n8n_credentials.json
+data/allowed_users.json
+
+logs/
+__pycache__/
+*.pyc
