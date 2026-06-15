@@ -6,7 +6,7 @@ The goal of this project is to let a user type requests such as:
 
 * "Summarize my latest Gmail emails and display here"
 * "Read Slack updates from #engineering and unread Gmail emails and show here"
-* "Generate a project update and send it to Slack #general"
+* "Generate a project update and send it to Slack channel #any channel name"
 * "Send a follow-up email using Gmail"
 
 The backend understands the request, checks required connections, builds workflow steps, creates an n8n workflow, activates it, calls the webhook, and returns the final response back to the chat UI.
