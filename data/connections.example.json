@@ -1,0 +1,33 @@
+{
+  "users": {
+    "example_google_user_id_123": {
+      "profile": {
+        "email": "user@example.com",
+        "name": "Example User"
+      },
+      "connections": {
+        "slack": {
+          "connected": false,
+          "access_token": "",
+          "token_type": "",
+          "scope": "",
+          "bot_user_id": "",
+          "oauth_token_data": {},
+          "team_id": "",
+          "user_id": "",
+          "workspace_name": ""
+        },
+        "gmail": {
+          "connected": false,
+          "access_token": "",
+          "refresh_token": "",
+          "expires_in": "",
+          "scope": "",
+          "token_type": "",
+          "oauth_token_data": {},
+          "email": ""
+        }
+      }
+    }
+  }
+}
