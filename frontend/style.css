@@ -1,0 +1,817 @@
+/* ================================
+   AI Workflow Assistant - Light UI
+   File: frontend/style.css
+   Purpose:
+   - ChatGPT-like left history
+   - Main chat area
+   - Tool status cards
+   - Workflow execution timeline
+   ================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #f4f6fb;
+  color: #111827;
+}
+
+/* Main shell */
+.app-shell {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ================================
+   LEFT SIDEBAR
+   ================================ */
+
+.sidebar {
+  width: 280px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 6px 18px;
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: #eef2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.2;
+  color: #111827;
+}
+
+.brand p {
+  margin: 2px 0 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.new-chat-btn {
+  border: none;
+  background: #6d5dfc;
+  color: white;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 14px;
+}
+
+.new-chat-btn:hover {
+  background: #5948ee;
+}
+
+.search-box input {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 11px 12px;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-box input:focus {
+  border-color: #6d5dfc;
+}
+
+.history-section {
+  margin-top: 18px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.history-label {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 16px 8px 8px;
+}
+
+.chat-history-item {
+  padding: 12px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: #374151;
+  font-size: 14px;
+}
+
+.chat-history-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-history-item small {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.chat-history-item:hover {
+  background: #f3f4f6;
+}
+
+.chat-history-item.active {
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.sidebar-footer {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+}
+
+.plain-sidebar-btn {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #374151;
+  text-align: left;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.plain-sidebar-btn:hover {
+  background: #f3f4f6;
+}
+
+/* ================================
+   MAIN AREA
+   ================================ */
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.topbar {
+  height: 78px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.topbar p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.ghost-btn {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.ghost-btn:hover {
+  background: #f9fafb;
+}
+
+/* ================================
+   CHAT AREA
+   ================================ */
+
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px;
+  min-height: 210px;
+}
+
+.message-row {
+  display: flex;
+  margin-bottom: 18px;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.message-row.bot {
+  justify-content: flex-start;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: #eef2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.message-card {
+  max-width: 760px;
+  border-radius: 16px;
+  padding: 14px 16px;
+  line-height: 1.5;
+  font-size: 15px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+}
+
+.bot-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.user-card {
+  background: #6d5dfc;
+  color: #ffffff;
+}
+
+.message-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.message-meta span {
+  color: #9ca3af;
+}
+
+.user-card .message-meta span {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.message-card p {
+  margin: 0;
+}
+
+/* ================================
+   TOOL STATUS CARDS
+   ================================ */
+
+.tool-status-panel {
+  display: flex;
+  gap: 14px;
+  padding: 0 28px 22px;
+  background: #f4f6fb;
+}
+.tool-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px;
+  min-width: 220px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tool-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tool-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+}
+
+.tool-icon.gmail {
+  background: #ef4444;
+}
+
+.tool-icon.slack {
+  background: #7c3aed;
+}
+
+.tool-card strong {
+  font-size: 14px;
+}
+
+.tool-card p {
+  margin: 2px 0 0;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.status-pill {
+  font-size: 12px;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-weight: 600;
+}
+
+.status-pill.connected {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.status-pill.failed {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+/* ================================
+   WORKFLOW PANEL
+   ================================ */
+
+.workflow-panel {
+  margin: 0 28px 18px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.workflow-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.workflow-header h3 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.workflow-header p {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.workflow-status {
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.workflow-status.idle {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.workflow-status.running {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.workflow-status.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.workflow-status.failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.workflow-nodes {
+  padding: 18px 20px;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  align-items: stretch;
+}
+
+.empty-workflow {
+  color: #9ca3af;
+  font-size: 14px;
+  padding: 20px;
+}
+
+.workflow-node {
+  min-width: 210px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 16px;
+  background: #f9fafb;
+  position: relative;
+}
+
+.workflow-node::after {
+  content: "→";
+  position: absolute;
+  right: -16px;
+  top: 42%;
+  color: #9ca3af;
+  font-size: 22px;
+}
+
+.workflow-node:last-child::after {
+  content: "";
+}
+
+.node-number {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #eef2ff;
+  color: #4338ca;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.node-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.node-subtitle {
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.node-status {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.node-status.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.node-status.failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.node-status.pending {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.workflow-result {
+  border-top: 1px solid #e5e7eb;
+  padding: 16px 20px;
+  background: #fbfdff;
+}
+
+.workflow-result p {
+  margin: 0;
+  color: #374151;
+  font-size: 14px;
+}
+
+.technical-details {
+  border-top: 1px solid #e5e7eb;
+  padding: 12px 20px;
+}
+
+.technical-details summary {
+  cursor: pointer;
+  color: #6d5dfc;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#rawJsonBox {
+  max-height: 220px;
+  overflow: auto;
+  background: #111827;
+  color: #e5e7eb;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+/* ================================
+   INPUT COMPOSER
+   ================================ */
+
+.composer {
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  padding: 16px 28px;
+  display: flex;
+  gap: 12px;
+}
+
+.composer input {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  padding: 14px 16px;
+  outline: none;
+  font-size: 15px;
+}
+
+.composer input:focus {
+  border-color: #6d5dfc;
+  box-shadow: 0 0 0 3px rgba(109, 93, 252, 0.14);
+}
+
+.send-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 14px;
+  background: #6d5dfc;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.send-btn:hover {
+  background: #5948ee;
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+
+  .tool-status-panel {
+    flex-direction: column;
+  }
+
+  .workflow-nodes {
+    flex-direction: column;
+  }
+
+  .workflow-node::after {
+    content: "↓";
+    right: 50%;
+    top: auto;
+    bottom: -22px;
+  }
+
+  .workflow-node:last-child::after {
+    content: "";
+  }
+}
+.tool-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tool-action-btn {
+  text-decoration: none;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #4f46e5;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tool-action-btn:hover {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+/* -----------------------------
+   Login welcome screen
+----------------------------- */
+
+.hidden {
+  display: none !important;
+}
+
+.login-screen {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at top left, rgba(107, 91, 255, 0.18), transparent 35%),
+    linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+  padding: 24px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 560px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 28px;
+  padding: 44px;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+}
+
+.login-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef2ff;
+  font-size: 34px;
+}
+
+.login-card h1 {
+  margin: 0 0 14px;
+  font-size: 34px;
+  line-height: 1.15;
+  color: #111827;
+}
+
+.login-card p {
+  margin: 0 auto 14px;
+  max-width: 430px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.login-subtext {
+  color: #6b7280;
+}
+
+.google-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: #6d5dfc;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(109, 93, 252, 0.28);
+}
+
+.google-login-btn:hover {
+  background: #5848f5;
+}
+.plain-sidebar-btn {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: #16a34a;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+}
+
+.plain-sidebar-btn:hover {
+  background: #15803d;
+}
+.logout-btn {
+  width: 100%;
+  margin-top: 20px;
+  border: none;
+  border-radius: 14px;
+  padding: 13px 16px;
+  background: #6b7280;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #4b5563;
+}
+/* -----------------------------
+   Settings modal
+----------------------------- */
+/* -----------------------------
+   Settings account menu
+----------------------------- */
+
+.settings-modal {
+  position: fixed;
+  left: 18px;
+  bottom: 88px;
+  width: 300px;
+  z-index: 9999;
+  background: transparent;
+  display: block;
+}
+
+.settings-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.settings-header h2 {
+  margin: 0;
+  font-size: 16px;
+  color: #111827;
+}
+
+.settings-close-btn {
+  border: none;
+  background: #f3f4f6;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.settings-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px 0;
+  border-bottom: 1px solid #edf0f3;
+}
+
+.settings-row span {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.settings-row strong {
+  font-size: 13px;
+  color: #111827;
+  word-break: break-word;
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: 14px;
+  border: none;
+  border-radius: 12px;
+  padding: 11px 14px;
+  background: #6b7280;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #4b5563;
+}
